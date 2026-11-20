@@ -99,6 +99,17 @@ The backend test suite checks independent KPI reconciliation, distinct order beh
 
 Representative local API checks returned HTTP 200 for health, metadata, filters, full dashboard, combined filters, empty results, and export. The response payload includes the measured DuckDB query duration as `query_ms`; this value is rendered in the dashboard footer.
 
+### Production verification
+
+Measured against the live Render service on 2026-11-20:
+
+- Health endpoint median round trip: 260.73 ms across 7 requests.
+- Initial HTML document median round trip: 252.75 ms across 7 requests. This measures the document request, not full browser asset/render time.
+- First observed full weekly dashboard cache miss: 4,259.79 ms HTTP round trip, including 3,960.53 ms reported backend query time.
+- Six identical repeated dashboard requests: 264.68 ms median HTTP round trip. They returned the same `generated_at` value, confirming the 60-second in-process cache served the repeated key.
+- Three different filtered dashboard requests: 2,720.65 ms median HTTP round trip and 2,504.07 ms median reported backend query time.
+- Render cold-start time was not isolated from these measurements.
+
 ## Deployment
 
 The repository includes a single-service `Dockerfile` and `render.yaml`. The image builds the frontend, installs the FastAPI runtime, packages the processed Parquet dataset, and serves the Vite build through FastAPI. Render can deploy it as a Docker web service and will provide the assigned `PORT` automatically. The health check is `/api/health`.
@@ -122,4 +133,5 @@ The verified live application is available at [business-analytics-dashboard-n3rp
 - The cache is per process, which is appropriate for the single-service deployment. A multi-instance deployment would need shared caching or would accept per-instance caches.
 - CSV export materializes the selected filtered result server-side before streaming it. Dashboard requests remain aggregated and bounded.
 - The source has one brand, so the brand filter is implemented but currently has one option.
+- Render does not permit changing an existing service's region after creation. The live service remains in its original region; `render.yaml` specifies `region: singapore` for a new service configuration, but applying that change to the existing service is rejected by Render.
 
