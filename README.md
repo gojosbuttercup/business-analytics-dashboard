@@ -108,12 +108,12 @@ docker build -t business-analytics-dashboard .
 docker run --rm -p 8000:8000 business-analytics-dashboard
 ```
 
-No deployment credentials or configured hosting account were available in this workspace, so no live URL is claimed. After connecting the repository in Render, select the included `render.yaml` or create the Docker web service and verify `/api/health` before adding the resulting URL here.
+The verified live application is available at [business-analytics-dashboard-n3rp.onrender.com](https://business-analytics-dashboard-n3rp.onrender.com/). Its health endpoint is [https://business-analytics-dashboard-n3rp.onrender.com/api/health](https://business-analytics-dashboard-n3rp.onrender.com/api/health).
 
 ## Submission status
 
-- GitHub repository URL: not created in this workspace because GitHub CLI is not installed or authenticated.
-- Live application URL: not deployed or claimed.
+- GitHub repository URL: [github.com/gojosbuttercup/business-analytics-dashboard](https://github.com/gojosbuttercup/business-analytics-dashboard).
+- Live application URL: [business-analytics-dashboard-n3rp.onrender.com](https://business-analytics-dashboard-n3rp.onrender.com/).
 - The processed Parquet file is intentionally included because the deployed service must load the real dataset without relying on a local Excel file. The original workbook is excluded by `.gitignore` and `.dockerignore`.
 
 ## Known limitations
