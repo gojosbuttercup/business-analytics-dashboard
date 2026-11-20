@@ -1,0 +1,59 @@
+{
+  "source_file": "data.xlsx",
+  "source_row_count": 300000,
+  "processed_row_count": 300000,
+  "columns": [
+    "BillNo",
+    "Outlet_Name",
+    "Order_Datetime",
+    "Group",
+    "Order_Type",
+    "Item",
+    "Price",
+    "Quantity",
+    "Settlement",
+    "Brand",
+    "line_revenue",
+    "order_date",
+    "order_month",
+    "order_year",
+    "order_weekday",
+    "order_hour"
+  ],
+  "date_min": "2025-06-17",
+  "date_max": "2026-06-16",
+  "timestamp_min": "2025-06-17T11:02:40",
+  "timestamp_max": "2026-06-16T23:48:34",
+  "distinct_orders": 110478,
+  "data_quality": {
+    "missing_by_column": {
+      "BillNo": 0,
+      "Outlet_Name": 0,
+      "Order_Datetime": 0,
+      "Group": 0,
+      "Order_Type": 0,
+      "Item": 0,
+      "Price": 0,
+      "Quantity": 0,
+      "Settlement": 0,
+      "Brand": 0
+    },
+    "invalid_numeric_by_column": {
+      "Price": 0,
+      "Quantity": 0
+    },
+    "negative_price_rows": 0,
+    "negative_quantity_rows": 0,
+    "zero_price_rows": 8611,
+    "duplicate_full_rows": 0,
+    "invalid_datetime": 0,
+    "ambiguous_datetime": 0,
+    "slash_mdy_datetime": 0,
+    "documented_dmy_datetime": 0
+  },
+  "parquet_size_bytes": 4337611,
+  "etl_seconds": 37.233,
+  "generated_at": "2026-11-20T13:17:33.154963+00:00",
+  "currency_assumption": "INR (\u20b9), based on the assessment's Indian outlet context",
+  "date_parsing": "Excel datetime cells are preserved. String inputs accept unambiguous slash-formatted month/day values and DD-MM-YYYY HH:MM:SS; ambiguous string values are logged and excluded from processed dates."
+}

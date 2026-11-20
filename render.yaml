@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: business-analytics-dashboard
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    healthCheckPath: /api/health
+    envVars:
+      - key: BA_CACHE_TTL_SECONDS
+        value: "60"
+      - key: BA_CACHE_MAX_ENTRIES
+        value: "64"
+
