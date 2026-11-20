@@ -52,12 +52,13 @@ Requirements: Python 3.12+, Node.js 20+, and npm.
 
 ```powershell
 # From the repository root
-python -m pip install -r backend/requirements.txt
-python scripts/process_data.py data/data.xlsx --output-dir data/processed
+python -m venv .venv
+.venv\Scripts\python.exe -m pip install -r backend/requirements.txt
+.venv\Scripts\python.exe scripts/process_data.py data/data.xlsx --output-dir data/processed
 
 # Terminal 1
 $env:PYTHONPATH = "backend"
-uvicorn app.main:app --app-dir backend --reload --port 8000
+.venv\Scripts\python.exe -m uvicorn app.main:app --app-dir backend --reload --host 127.0.0.1 --port 8000
 
 # Terminal 2
 cd frontend
@@ -72,7 +73,7 @@ Open `http://localhost:5173`. The Vite development server proxies `/api` to Fast
 Run the pipeline whenever the source workbook changes:
 
 ```powershell
-python scripts/process_data.py data/data.xlsx --output-dir data/processed
+.venv\Scripts\python.exe scripts/process_data.py data/data.xlsx --output-dir data/processed
 ```
 
 The current measured ETL run processed 300,000 rows in 37.233 seconds and produced a 4,337,611-byte Snappy Parquet file. The run writes the original and processed row counts, date parsing counts, numeric quality counts, duplicate counts, and assumptions to `data/processed/metadata.json`.
@@ -89,7 +90,7 @@ The current measured ETL run processed 300,000 rows in 37.233 seconds and produc
 
 ```powershell
 $env:PYTHONPATH = "backend"
-pytest backend/tests -q
+.venv\Scripts\python.exe -m pytest backend/tests -q
 cd frontend
 npm run build
 ```
